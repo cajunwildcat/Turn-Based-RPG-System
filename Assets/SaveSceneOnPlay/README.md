@@ -1,0 +1,1 @@
+A simple asset that will save the currently open scenes whenever you enter play mode in the editor.

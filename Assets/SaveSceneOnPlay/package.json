@@ -1,0 +1,8 @@
+{
+    "name": "com.cajunwildcat.saveSceneOnPlay",
+    "version": "1.0.0",
+    "displayName": "Save Scene On Play",
+    "description": "Auto save scene on play mode change for Unity",
+    "unity": "2022.3.5f1",
+    "keywords": ["Unity", "Editor", "Package"]
+}
