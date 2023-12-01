@@ -86,6 +86,7 @@ public class CombatManager : MonoBehaviour {
         ResetEnemyTargettingNav();
         this.enemies = enemies;
         this.playerChars = playerChars;
+        UIManager.Instance.EnableCharDetails(playerChars.Select(x => (PlayerCharacter)x).ToList());
 
         activeCombatants.Clear();
         activeCombatants.AddRange(enemies);
@@ -95,13 +96,16 @@ public class CombatManager : MonoBehaviour {
             ((MonoBehaviour)enemies[i]).transform.position = enemyPositions[i];
             enemyTargetSelects[i].gameObject.SetActive(true);
         }
+        for (int i = 0; i < playerChars.Count; i++) {
+            ((MonoBehaviour)playerChars[i]).transform.position = pcPositions[i];
+        }
 
         int turnNum = 1;
         //player characters can be brought back from 0 HP, so Count will never decrease so instead check if any character is alive
         while (enemies.Where(x => x.CurrHealth > 0).Any() && playerChars.Where(x => x.CurrHealth > 0).Any()) {
             GetTurnOrder();
 
-            for (int i = 0; i < activeCombatants.Count; i++) {
+            for (int i = 0; i < activeCombatants.Count && enemies.Where(x => x.CurrHealth > 0).Any() && playerChars.Where(x => x.CurrHealth > 0).Any(); i++) {
                 yield return StartCoroutine(activeCombatants[i].GenerateTurn());
                 yield return new WaitForSeconds(1 / Time.timeScale);
             }

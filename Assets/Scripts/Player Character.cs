@@ -13,8 +13,13 @@ public class PlayerCharacter : MonoBehaviour, ICombatant {
     private int def;
     [SerializeField]
     private int spd = 100;
+    private int maxMP = 100;
+    private int currentMP;
     public string Name {get; private set;}
     public int CurrHealth => currentHealth;
+    public int MaxHealth => maxHealth;
+    public int MaxMP => maxMP;
+    public int CurrMP => currentMP;
     public int Strength => str;
     public int Defense => def;
     public int Speed => spd;
@@ -46,6 +51,7 @@ public class PlayerCharacter : MonoBehaviour, ICombatant {
             currentHealth -= amount - def;
         }
         currentHealth = Mathf.Max(0, currentHealth);
+        UIManager.Instance.UpdateHealth(name, currentHealth, maxHealth);
         if (currentHealth == 0) {
             Die();
         }
@@ -103,6 +109,7 @@ public class PlayerCharacter : MonoBehaviour, ICombatant {
 
     void Start() {
         currentHealth = maxHealth;
+        currentMP = maxMP;
         Name = gameObject.name;
         sr = GetComponent<SpriteRenderer>();
     }

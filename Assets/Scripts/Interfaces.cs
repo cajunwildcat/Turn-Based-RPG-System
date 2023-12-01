@@ -6,6 +6,7 @@ using UnityEngine;
 public interface ICombatant {
     public string Name { get; }
     public int CurrHealth { get; }
+    public int MaxHealth { get; }
     public int Strength { get; }
     public int Defense { get; }
     public int Speed { get; }
