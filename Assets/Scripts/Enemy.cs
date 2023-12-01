@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour, ICombatant {
     private int spd;
 
     public int CurrHealth => currentHealth;
+    public int MaxHealth => maxHealth;
     public int Strength => str;
     public int Defense => def;
     public int Speed => spd;
@@ -50,7 +51,7 @@ public class Enemy : MonoBehaviour, ICombatant {
     }
 
     public void TakeDamage(int amount, DamageType damageType) {
-        currentHealth -= Mathf.Max(0, amount - def);
+        currentHealth -= Mathf.Max(1, amount - def);
         healthBarFill.fillAmount = (float)currentHealth / maxHealth;
         if (currentHealth <= 0) Die();
     }
